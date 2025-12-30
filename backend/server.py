@@ -537,6 +537,22 @@ async def approve_seller(seller_id: str, status: str, current_user: User = Depen
     
     return {"message": f"Seller {status} successfully"}
 
+
+@api_router.get("/sellers/my-status")
+async def get_my_seller_status(current_user: User = Depends(get_current_user)):
+    """Get current user's seller status"""
+    seller = await db.sellers.find_one({"user_id": current_user.user_id}, {"_id": 0})
+    if not seller:
+        return {"is_seller": False, "status": None, "seller_id": None}
+    
+    return {
+        "is_seller": True,
+        "status": seller["status"],
+        "seller_id": seller["seller_id"],
+        "business_name": seller.get("business_name")
+    }
+
+
 # ============= FOOD ITEM ROUTES =============
 
 @api_router.post("/food-items", response_model=FoodItem)
