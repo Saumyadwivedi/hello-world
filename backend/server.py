@@ -14,6 +14,7 @@ from emergentintegrations.payments.stripe.checkout import StripeCheckout, Checko
 import gridfs
 from bson import ObjectId
 import base64
+import bcrypt
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
