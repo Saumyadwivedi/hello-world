@@ -453,6 +453,8 @@ async def register_seller(
     fssai_doc: UploadFile = File(...),
     current_user: User = Depends(get_current_user)
 ):
+    logger.info(f"Seller registration started for user: {current_user.email}")
+    
     if not current_user.society_id:
         raise HTTPException(status_code=400, detail="You must join a society first")
     
@@ -481,14 +483,16 @@ async def register_seller(
     }
     
     await db.sellers.insert_one(seller_dict)
+    logger.info(f"Seller record created: {seller_id}")
     
     # Immediately update user role to seller
-    await db.users.update_one(
+    result = await db.users.update_one(
         {"user_id": current_user.user_id},
         {"$set": {"role": "seller"}}
     )
+    logger.info(f"User role updated to seller. Modified count: {result.modified_count}")
     
-    return {"message": "You are now a seller!", "seller_id": seller_id}
+    return {"message": "You are now a seller!", "seller_id": seller_id, "success": True}
 
 @api_router.get("/sellers", response_model=List[Seller])
 async def list_sellers(current_user: User = Depends(get_current_user)):
