@@ -62,7 +62,8 @@ const BecomeSeller = () => {
       formDataToSend.append('fssai_doc', formData.fssai_doc);
 
       await registerSeller(formDataToSend);
-      toast.success('Seller registration submitted! Waiting for society admin approval.');
+      toast.success('Seller registration submitted! Please wait for society admin approval. You will receive an update soon.');
+      // Stay on home page until approved
       navigate('/home');
     } catch (error) {
       toast.error('Failed to register as seller');
