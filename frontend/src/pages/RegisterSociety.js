@@ -247,7 +247,8 @@ const RegisterSociety = () => {
                 </Button>
               </form>
             </DialogContent>
-          </Dialog>
+            </Dialog>
+          </div>
         </div>
 
         {/* Approved Societies */}
