@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import '@/App.css';
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
+import { CartProvider } from '@/context/CartContext';
 
 // Pages
 import Landing from '@/pages/Landing';
@@ -18,6 +19,7 @@ import BecomeSeller from '@/pages/BecomeSeller';
 import Cart from '@/pages/Cart';
 import Orders from '@/pages/Orders';
 import OrderDetails from '@/pages/OrderDetails';
+import PaymentCheckout from '@/pages/PaymentCheckout';
 import PaymentSuccess from '@/pages/PaymentSuccess';
 import PaymentCancel from '@/pages/PaymentCancel';
 
