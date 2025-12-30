@@ -173,6 +173,16 @@ const UserHome = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Seller Status Banner */}
+        {sellerStatus && sellerStatus.is_seller && sellerStatus.status === 'pending' && (
+          <div className="mb-6 bg-[#FFC107] text-black rounded-xl p-4 flex items-center justify-between">
+            <div>
+              <p className="font-bold">Seller Application Pending</p>
+              <p className="text-sm">Your seller application is awaiting society admin approval.</p>
+            </div>
+          </div>
+        )}
+        
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-[#1A1A1A] mb-2">
