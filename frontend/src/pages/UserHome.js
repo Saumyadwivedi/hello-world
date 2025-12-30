@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const UserHome = () => {
   const navigate = useNavigate();
