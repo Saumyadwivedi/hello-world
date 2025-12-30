@@ -474,15 +474,21 @@ async def register_seller(
         "fssai_number": fssai_number,
         "aadhar_doc_id": str(aadhar_id),
         "fssai_doc_id": str(fssai_id),
-        "status": "pending",
-        "approved_by": None,
-        "approved_at": None,
+        "status": "approved",  # Auto-approve
+        "approved_by": "system",
+        "approved_at": datetime.now(timezone.utc).isoformat(),
         "created_at": datetime.now(timezone.utc).isoformat()
     }
     
     await db.sellers.insert_one(seller_dict)
     
-    return {"message": "Seller registration submitted", "seller_id": seller_id}
+    # Immediately update user role to seller
+    await db.users.update_one(
+        {"user_id": current_user.user_id},
+        {"$set": {"role": "seller"}}
+    )
+    
+    return {"message": "You are now a seller!", "seller_id": seller_id}
 
 @api_router.get("/sellers", response_model=List[Seller])
 async def list_sellers(current_user: User = Depends(get_current_user)):
