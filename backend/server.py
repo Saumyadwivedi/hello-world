@@ -21,7 +21,12 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
-grid_fs = gridfs.GridFS(client[os.environ['DB_NAME']])
+
+# GridFS setup (synchronous client for file operations)
+from pymongo import MongoClient
+sync_client = MongoClient(mongo_url)
+sync_db = sync_client[os.environ['DB_NAME']]
+grid_fs = gridfs.GridFS(sync_db)
 
 # Stripe setup
 stripe_api_key = os.environ.get('STRIPE_API_KEY')
