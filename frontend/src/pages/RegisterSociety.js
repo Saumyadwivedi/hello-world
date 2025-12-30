@@ -125,13 +125,14 @@ const RegisterSociety = () => {
             </div>
           </div>
 
-          <Dialog open={showCreateForm} onOpenChange={setShowCreateForm}>
-            <DialogTrigger asChild>
-              <Button data-testid="create-society-btn" className="btn-primary">
-                <Plus className="h-5 w-5 mr-2" />
-                Register New Society
-              </Button>
-            </DialogTrigger>
+          <div className="flex items-center space-x-3">
+            <Dialog open={showCreateForm} onOpenChange={setShowCreateForm}>
+              <DialogTrigger asChild>
+                <Button data-testid="create-society-btn" className="btn-primary">
+                  <Plus className="h-5 w-5 mr-2" />
+                  Register New Society
+                </Button>
+              </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold">Register New Society</DialogTitle>
