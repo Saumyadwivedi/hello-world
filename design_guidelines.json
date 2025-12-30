@@ -1,0 +1,150 @@
+{
+  "identity": {
+    "persona": "E1",
+    "philosophy": "Fusion over Imitation. Emotion First. Content is King.",
+    "anti_patterns": [
+      "Generic 'Inter' everywhere",
+      "Center-everything layouts",
+      "Sterile white backgrounds for food apps",
+      "Default Bootstrap/Vercel aesthetics"
+    ]
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Nunito, sans-serif",
+      "weights": ["700", "800"],
+      "usage": "Main headers, Section titles, Food Categories",
+      "letter_spacing": "tracking-tight"
+    },
+    "body": {
+      "font_family": "DM Sans, sans-serif",
+      "weights": ["400", "500", "700"],
+      "usage": "Paragraphs, UI elements, Data tables",
+      "letter_spacing": "tracking-normal"
+    },
+    "accents": {
+      "font_family": "Caveat, cursive",
+      "usage": "Testimonials, 'Homemade' badges, Special offers"
+    }
+  },
+  "colors": {
+    "palette_name": "Fresh & Zesty (Organic + Electric)",
+    "mode": "light",
+    "primary": {
+      "name": "Zesty Tangerine",
+      "hex": "#FF6B35",
+      "tailwind": "bg-[#FF6B35] text-white hover:bg-[#E85A2D]",
+      "usage": "Primary Buttons, CTAs, Price Tags, Notification Badges"
+    },
+    "secondary": {
+      "name": "Fresh Basil",
+      "hex": "#4CAF50",
+      "tailwind": "bg-[#4CAF50] text-white",
+      "usage": "Veg indicators, Success states, 'Fresh' tags"
+    },
+    "accent": {
+      "name": "Sunny Yolk",
+      "hex": "#FFC107",
+      "tailwind": "bg-[#FFC107] text-black",
+      "usage": "Ratings, Stars, Highlights"
+    },
+    "neutral": {
+      "background": "#FDFBF7",
+      "surface": "#FFFFFF",
+      "text_primary": "#1A1A1A",
+      "text_secondary": "#666666",
+      "border": "#E5E0D8"
+    },
+    "semantic": {
+      "veg": "#4CAF50",
+      "non_veg": "#E53935",
+      "jain": "#8BC34A"
+    }
+  },
+  "visual_enhancers": {
+    "radius": "rounded-2xl",
+    "shadows": {
+      "card": "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+      "hover": "shadow-[0_8px_30px_rgb(0,0,0,0.08)]",
+      "button": "shadow-[0_4px_14px_0_rgba(255,107,53,0.39)]"
+    },
+    "textures": "Subtle grain overlay on hero sections to give a 'paper menu' feel.",
+    "gradients": "Use subtle warm gradients (Orange -> Yellow) for 'Hot' items, but keep UI flat and clean."
+  },
+  "layout_strategies": {
+    "marketing": {
+      "grid": "Bento Grid (Mode A)",
+      "spacing": "Generous (p-8 to p-24)",
+      "vibe": "Asymmetrical, playful, appetizing"
+    },
+    "dashboard": {
+      "grid": "Control Room (Mode B)",
+      "style": "Soft Utility - Rounded corners, card-based but with 'Clay' feel",
+      "density": "Comfortable - Don't cram data. Food needs space to breathe."
+    }
+  },
+  "components": {
+    "buttons": {
+      "style": "Pill-shaped (rounded-full)",
+      "interaction": "Scale up slightly on hover (scale-105), shadow glow"
+    },
+    "cards": {
+      "food_item": "White card, rounded-2xl, image takes top 60%, content bottom 40%. Floating 'Add' button.",
+      "seller_profile": "Profile picture overlaps cover image. Clean typography."
+    },
+    "navigation": {
+      "style": "Floating glassmorphism header (backdrop-blur-md, bg-white/80)",
+      "border": "border-b border-black/5"
+    }
+  },
+  "image_urls": {
+    "hero_food": {
+      "url": "https://images.unsplash.com/photo-1758705207198-ea3145c96a93?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Pumpkin pancakes with honey - Warm, homemade vibe for Hero section",
+      "category": "hero"
+    },
+    "home_chef": {
+      "url": "https://images.unsplash.com/photo-1758522484068-4ba2b78add9e?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Cheerful woman cooking - For 'Become a Seller' or 'Our Chefs' section",
+      "category": "people"
+    },
+    "society_building": {
+      "url": "https://images.unsplash.com/photo-1762397794646-f19044bd0828?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Modern apartment complex - For Society Registration/Selection page",
+      "category": "places"
+    },
+    "food_hotpot": {
+      "url": "https://images.unsplash.com/photo-1754663761389-e96d553aff81?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Hot pot meal - For 'Community Dining' or 'Family Meals' category",
+      "category": "food"
+    },
+    "food_burger": {
+      "url": "https://images.unsplash.com/photo-1627955280978-f54fff2f316a?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Burger and fries - For 'Fast Food' or 'Snacks' category",
+      "category": "food"
+    }
+  },
+  "instructions_to_main_agent": {
+    "general": "You are building a 'Zomato for Societies'. The vibe must be TRUST + TASTE. It's not just food; it's your neighbor cooking.",
+    "theme_setup": "Use the 'Fresh & Zesty' palette. Backgrounds should be #FDFBF7 (Warm Sand), not pure white. This mimics a table cloth or parchment.",
+    "fonts": "Import 'Nunito' for headings and 'DM Sans' for body from Google Fonts.",
+    "icons": "Use 'Lucide-React' with rounded stroke endings if possible. Use 'Utensils', 'ChefHat', 'Building', 'Leaf' icons heavily.",
+    "animations": "Use 'Framer Motion' for: 1. Staggered list entrance for food items. 2. 'Pop' effect when adding to cart. 3. Smooth page transitions.",
+    "charts": "For Admin Dashboard, use Recharts with the custom palette (Tangerine, Basil, Yolk). Avoid default blues.",
+    "forms": "For Seller Onboarding (Aadhar/FSSAI), use multi-step forms with clear progress indicators. Make it feel official but not scary."
+  },
+  "universal_guidelines": {
+    "do_not": [
+      "Do NOT use generic 'Inter' font for headings.",
+      "Do NOT use pure black (#000000). Use #1A1A1A.",
+      "Do NOT make the UI crowded. Food photos need space.",
+      "Do NOT use 'Lorem Ipsum'. Use real food names (e.g., 'Aunty's Paneer Tikka', 'Sunday Special Biryani')."
+    ],
+    "must_do": [
+      "MUST use 'data-testid' on all interactive elements.",
+      "MUST ensure high contrast for accessibility.",
+      "MUST use the provided image URLs for placeholders.",
+      "MUST implement responsive design (Mobile First)."
+    ]
+  }
+}
