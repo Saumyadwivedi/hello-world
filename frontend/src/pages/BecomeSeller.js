@@ -98,20 +98,31 @@ const BecomeSeller = () => {
     <div className="min-h-screen bg-[#FDFBF7] py-8">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex items-center mb-8">
-          <button
-            data-testid="back-btn"
-            onClick={() => navigate(-1)}
-            className="mr-4 p-2 hover:bg-white rounded-full transition-colors"
-          >
-            <ArrowLeft className="h-6 w-6 text-[#666666]" />
-          </button>
-          <div>
-            <h1 className="text-3xl font-bold text-[#1A1A1A]">
-              Become a Seller
-            </h1>
-            <p className="text-[#666666]">Share your delicious food with neighbors</p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center">
+            <button
+              data-testid="back-btn"
+              onClick={() => navigate(-1)}
+              className="mr-4 p-2 hover:bg-white rounded-full transition-colors"
+            >
+              <ArrowLeft className="h-6 w-6 text-[#666666]" />
+            </button>
+            <div>
+              <h1 className="text-3xl font-bold text-[#1A1A1A]">
+                Become a Seller
+              </h1>
+              <p className="text-[#666666]">Share your delicious food with neighbors</p>
+            </div>
           </div>
+          
+          <button
+            data-testid="logout-btn"
+            onClick={handleLogout}
+            className="flex items-center space-x-2 px-4 py-2 text-[#666666] hover:text-[#FF6B35] hover:bg-white rounded-full transition-colors"
+          >
+            <LogOut className="h-5 w-5" />
+            <span>Logout</span>
+          </button>
         </div>
 
         {/* Info Card */}
