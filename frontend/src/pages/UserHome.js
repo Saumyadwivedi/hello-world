@@ -41,14 +41,31 @@ const UserHome = () => {
         return;
       }
 
-      const [societyResponse, itemsResponse] = await Promise.all([
-        getSociety(userResponse.data.society_id),
+      const [societyResponse, itemsResponse] = await Promise.all([\n        getSociety(userResponse.data.society_id),
         getFoodItems({ society_id: userResponse.data.society_id })
       ]);
 
       setSociety(societyResponse.data);
       setFoodItems(itemsResponse.data);
       setFilteredItems(itemsResponse.data);
+      
+      // Check seller status
+      try {
+        const sellerStatusResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/sellers/my-status`, {
+          withCredentials: true
+        });
+        setSellerStatus(sellerStatusResponse.data);
+        
+        // If approved as seller, redirect to seller dashboard
+        if (sellerStatusResponse.data.status === 'approved') {
+          toast.info('You are now a seller! Redirecting to your dashboard...');
+          setTimeout(() => {
+            window.location.href = '/seller/dashboard';
+          }, 2000);
+        }
+      } catch (error) {
+        // User is not a seller, that's fine
+      }
     } catch (error) {
       toast.error('Failed to load data');
     } finally {
