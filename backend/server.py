@@ -266,6 +266,103 @@ async def logout(request: Request, response: Response):
     response.delete_cookie("session_token")
     return {"message": "Logged out successfully"}
 
+
+# ============= EMAIL/PASSWORD AUTH MODELS =============
+
+class SignupRequest(BaseModel):
+    email: EmailStr
+    password: str
+    name: str
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+# ============= EMAIL/PASSWORD AUTH ROUTES =============
+
+@api_router.post("/auth/signup")
+async def signup(signup_data: SignupRequest):
+    # Check if user already exists
+    existing_user = await db.users.find_one({"email": signup_data.email}, {"_id": 0})
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    # Hash password
+    password_hash = bcrypt.hashpw(signup_data.password.encode('utf-8'), bcrypt.gensalt())
+    
+    # Create new user
+    user_id = f"user_{uuid.uuid4().hex[:12]}"
+    
+    # Check if this is the first user (make them admin)
+    user_count = await db.users.count_documents({})
+    role = "admin" if user_count == 0 else "user"
+    
+    await db.users.insert_one({
+        "user_id": user_id,
+        "email": signup_data.email,
+        "name": signup_data.name,
+        "password_hash": password_hash.decode('utf-8'),
+        "picture": None,
+        "role": role,
+        "society_id": None,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    })
+    
+    # Create session
+    session_token = f"session_{uuid.uuid4().hex}"
+    expires_at = datetime.now(timezone.utc) + timedelta(days=7)
+    
+    await db.user_sessions.insert_one({
+        "user_id": user_id,
+        "session_token": session_token,
+        "expires_at": expires_at,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    })
+    
+    # Get user without password hash
+    user_doc = await db.users.find_one({"user_id": user_id}, {"_id": 0, "password_hash": 0})
+    
+    return {
+        "session_token": session_token,
+        "user": user_doc
+    }
+
+@api_router.post("/auth/login")
+async def login(login_data: LoginRequest):
+    # Find user
+    user_doc = await db.users.find_one({"email": login_data.email}, {"_id": 0})
+    
+    if not user_doc:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    # Check if user has password (might be OAuth only user)
+    if "password_hash" not in user_doc:
+        raise HTTPException(status_code=401, detail="Please use Google login for this account")
+    
+    # Verify password
+    if not bcrypt.checkpw(login_data.password.encode('utf-8'), user_doc["password_hash"].encode('utf-8')):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    # Create session
+    session_token = f"session_{uuid.uuid4().hex}"
+    expires_at = datetime.now(timezone.utc) + timedelta(days=7)
+    
+    await db.user_sessions.insert_one({
+        "user_id": user_doc["user_id"],
+        "session_token": session_token,
+        "expires_at": expires_at,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    })
+    
+    # Remove password hash from response
+    user_doc.pop("password_hash", None)
+    
+    return {
+        "session_token": session_token,
+        "user": user_doc
+    }
+
+
 # ============= SOCIETY ROUTES =============
 
 @api_router.post("/societies", response_model=Society)
