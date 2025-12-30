@@ -36,6 +36,13 @@ const UserHome = () => {
       const userResponse = await getMe();
       setUser(userResponse.data);
 
+      // If user is a seller, redirect to seller dashboard immediately
+      if (userResponse.data.role === 'seller') {
+        toast.info('Redirecting to your seller dashboard...');
+        navigate('/seller/dashboard');
+        return;
+      }
+
       if (!userResponse.data.society_id) {
         toast.error('Please join a society first');
         navigate('/register-society');
@@ -51,20 +58,12 @@ const UserHome = () => {
       setFoodItems(itemsResponse.data);
       setFilteredItems(itemsResponse.data);
       
-      // Check seller status
+      // Check seller status for pending applications
       try {
         const sellerStatusResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/sellers/my-status`, {
           withCredentials: true
         });
         setSellerStatus(sellerStatusResponse.data);
-        
-        // If approved as seller, redirect to seller dashboard
-        if (sellerStatusResponse.data.status === 'approved') {
-          toast.info('You are now a seller! Redirecting to your dashboard...');
-          setTimeout(() => {
-            window.location.href = '/seller/dashboard';
-          }, 2000);
-        }
       } catch (error) {
         // User is not a seller, that's fine
       }
