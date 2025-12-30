@@ -185,7 +185,7 @@ const SellerDashboard = () => {
                     <SelectTrigger data-testid="food-type-select">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper" sideOffset={5}>
                       <SelectItem value="veg">Vegetarian</SelectItem>
                       <SelectItem value="non-veg">Non-Vegetarian</SelectItem>
                       <SelectItem value="jain">Jain</SelectItem>
