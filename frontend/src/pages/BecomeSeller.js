@@ -62,14 +62,13 @@ const BecomeSeller = () => {
       formDataToSend.append('fssai_doc', formData.fssai_doc);
 
       await registerSeller(formDataToSend);
-      toast.success('Seller application submitted successfully! You will be notified once approved by your society admin.', {
-        duration: 5000
-      });
       
-      // Redirect to home page where they can browse food while waiting for approval
+      toast.success('Welcome! You are now a seller. Start uploading your menu!');
+      
+      // Redirect to seller dashboard immediately
       setTimeout(() => {
-        navigate('/home');
-      }, 2000);
+        window.location.href = '/seller/dashboard';
+      }, 1500);
     } catch (error) {
       const errorMsg = error.response?.data?.detail || 'Failed to register as seller';
       toast.error(errorMsg);
