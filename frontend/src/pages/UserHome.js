@@ -20,6 +20,7 @@ const UserHome = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [foodTypeFilter, setFoodTypeFilter] = useState('all');
+  const [sellerStatus, setSellerStatus] = useState(null);
 
   useEffect(() => {
     fetchData();
