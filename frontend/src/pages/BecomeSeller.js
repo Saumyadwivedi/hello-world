@@ -71,6 +71,18 @@ const BecomeSeller = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      document.cookie = 'session_token=; path=/; max-age=0';
+      toast.success('Logged out successfully');
+      navigate('/login');
+    } catch (error) {
+      document.cookie = 'session_token=; path=/; max-age=0';
+      navigate('/login');
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
