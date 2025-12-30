@@ -126,6 +126,15 @@ const RegisterSociety = () => {
           </div>
 
           <div className="flex items-center space-x-3">
+            <button
+              data-testid="logout-btn"
+              onClick={handleLogout}
+              className="flex items-center space-x-2 px-4 py-2 text-[#666666] hover:text-[#FF6B35] hover:bg-white rounded-full transition-colors"
+            >
+              <LogOut className="h-5 w-5" />
+              <span>Logout</span>
+            </button>
+            
             <Dialog open={showCreateForm} onOpenChange={setShowCreateForm}>
               <DialogTrigger asChild>
                 <Button data-testid="create-society-btn" className="btn-primary">
