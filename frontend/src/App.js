@@ -97,6 +97,12 @@ function AppRouter() {
           </ProtectedRoute>
         } />
         
+        <Route path="/payment/checkout" element={
+          <ProtectedRoute>
+            <PaymentCheckout />
+          </ProtectedRoute>
+        } />
+        
         <Route path="/payment/success" element={
           <ProtectedRoute>
             <PaymentSuccess />
