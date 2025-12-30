@@ -42,7 +42,8 @@ const UserHome = () => {
         return;
       }
 
-      const [societyResponse, itemsResponse] = await Promise.all([\n        getSociety(userResponse.data.society_id),
+      const [societyResponse, itemsResponse] = await Promise.all([
+        getSociety(userResponse.data.society_id),
         getFoodItems({ society_id: userResponse.data.society_id })
       ]);
 
