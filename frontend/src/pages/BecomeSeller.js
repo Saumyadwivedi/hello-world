@@ -61,18 +61,23 @@ const BecomeSeller = () => {
       formDataToSend.append('aadhar_doc', formData.aadhar_doc);
       formDataToSend.append('fssai_doc', formData.fssai_doc);
 
-      await registerSeller(formDataToSend);
+      const response = await registerSeller(formDataToSend);
       
-      toast.success('Welcome! You are now a seller. Start uploading your menu!');
+      console.log('Seller registration response:', response.data);
       
-      // Redirect to seller dashboard immediately
+      toast.success('Welcome! You are now a seller!', {
+        duration: 2000
+      });
+      
+      // Force page reload to refresh session and redirect properly
       setTimeout(() => {
+        console.log('Redirecting to seller dashboard...');
         window.location.href = '/seller/dashboard';
-      }, 1500);
+      }, 1000);
     } catch (error) {
+      console.error('Seller registration error:', error);
       const errorMsg = error.response?.data?.detail || 'Failed to register as seller';
       toast.error(errorMsg);
-    } finally {
       setSubmitting(false);
     }
   };
